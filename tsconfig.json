@@ -1,0 +1,26 @@
+// This file specifies the root files and the compiler options
+// required to compile a TypeScript project.
+
+{
+  // An object containing various settings that control how
+  // TypeScript compiles the code.
+  "compilerOptions": {
+    // Specifies the JavaScript version to which TypeScript
+    // should transpile the code. Here, it's set to es6
+    "target": "es6",
+    // Specifies the module code generation method. Here, it's
+    // set to commonjs, which is used in Node.js environments
+    "module": "commonjs",
+    // Specifies the output directory for the compiled JavaScript files
+    "outDir": "./dist",
+    // Specifies the root directory of the TypeScript source files
+    "rootDir": "./src",
+    // Enables all strict type-checking options.
+    "strict": true,
+    // Enables emit interoperability between CommonJS and ES Modules via
+    // creation of namespace objects for all imports
+    "esModuleInterop": true
+  },
+  // An array of file patterns that should be included in the project
+  "include": ["src/**/*"]
+}

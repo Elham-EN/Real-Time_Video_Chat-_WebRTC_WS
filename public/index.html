@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket Video Chat</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="controls">
+        <input type="text" id="username" placeholder="Enter your username" />
+        <button id="setUsernameButton">Set Username</button>
+        <button id="startButton">Start Video Chat</button>
+        <button id="endButton" style="display: none">End Chat</button>
+        <button id="muteButton" style="display: none">Mute Mic</button>
+        <button id="unmuteButton" style="display: none">Unmute Mic</button>
+        <input type="file" id="fileInput" style="display: none" />
+        <button id="sendFileButton" style="display: none">Send File</button>
+      </div>
+      <div class="video-container">
+        <div class="video-wrapper">
+          <label class="username-label" id="localUsernameLabel">You</label>
+          <video id="localVideo" autoplay muted></video>
+        </div>
+        <div class="video-wrapper">
+          <label class="username-label" id="remoteUsernameLabel">Remote User</label>
+          <video id="remoteVideo" autoplay></video>
+        </div>
+      </div>
+      <div class="chat-container">
+        <div id="chatBox" class="chat-box"></div>
+        <div class="chat-controls">
+          <input type="text" id="chatInput" placeholder="Type a message" />
+          <button id="sendButton">Send</button>
+        </div>
+      </div>
+    </div>
+    <script src="dist/index.js"></script>
+  </body>
+</html>
