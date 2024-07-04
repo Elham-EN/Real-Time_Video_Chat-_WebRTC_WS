@@ -87,6 +87,13 @@ export default class ChatUIHandler {
     this.sendFileButton.addEventListener("click", () => this.fileInput.click());
     this.fileInput.addEventListener("change", this.handleFileInput.bind(this));
 
+    this.chatInput.addEventListener("keypress", (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        this.sendMessage();
+      }
+    });
+
     this.peerConnectionHandler.onIceCandidate = (candidate: RTCIceCandidate) => {
       this.webSocketHandler.send({
         type: "candidate",
@@ -220,7 +227,7 @@ export default class ChatUIHandler {
    * Sends a chat message to the server.
    */
   private sendMessage(): void {
-    const message = this.chatInput.value;
+    const message = this.chatInput.value.trim();
     if (message) {
       const chatMessage = { type: "chat", message, username: this.username };
       this.webSocketHandler.send(chatMessage);
@@ -272,11 +279,13 @@ export default class ChatUIHandler {
 
     const contentElement = document.createElement("div");
     contentElement.classList.add("content");
-    contentElement.textContent = `${data.username}: ${data.message}`;
+    contentElement.textContent = isSent
+      ? data.message
+      : `${data.username}: ${data.message}`;
 
     messageElement.appendChild(contentElement);
     this.chatBox.appendChild(messageElement);
-    this.chatBox.scrollTop = this.chatBox.scrollHeight; // Auto-scroll to the latest message
+    this.chatBox.scrollTop = this.chatBox.scrollHeight;
   }
 
   /**

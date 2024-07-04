@@ -15,16 +15,24 @@ export default class PeerConnectionHandler {
 
   /**
    * Initializes the RTCPeerConnection event listeners.
+   * These event listeners are fundamental for WebRTC connection establishment
+   * and media handling
    */
   private init(): void {
+    // Handles ICE candidate generation for establishing peer-to-peer connection
     this.peerConnection.onicecandidate = (event: RTCPeerConnectionIceEvent) => {
+      // When a new ICE candidate is available, it triggers the onIceCandidate
+      // callback for signaling
       if (event.candidate) {
         this.onIceCandidate(event.candidate);
       }
     };
 
+    // Manages incoming media streams from the remote peer
     this.peerConnection.ontrack = (event: RTCTrackEvent) => {
       if (this.remoteVideo.srcObject !== event.streams[0]) {
+        // When a new track is received, it assigns the stream to the remote
+        // video element, enabling the display of the remote peer's video
         this.remoteVideo.srcObject = event.streams[0];
       }
     };
